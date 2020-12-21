@@ -49,7 +49,10 @@ int lengthToRead = 0;
 bool forceNewFile = false;
 
 void setup(){
-  selectedFile = "frames2.txt"
+
+  //Set Default file
+  charArrayWriter(selectedFile, (char*) "frames2.txt");
+  
   for(int i=0; i < MAXPORTS; i++){
     deviceNumPixels[i] = 0; // Initalizes the Array for Error Checking later
   }
@@ -191,6 +194,36 @@ void getSerialUpdates(){
     }
     else if(serialCommand == 'w'){ // Write SD card File
       
+      lengthToRead = Serial.available()+1; //Save how many Serial Bytes to Read. +1 because it would always miss the last character
+      Serial.readString().toCharArray(workingFile, lengthToRead); // Read the String and put it to a char array
+      if(SD.exists(workingFile)){ // Check if file exists
+        Serial.println("File Already Exists.");
+      }
+      else {
+        Serial.println("Starting File Writing.");
+        frames.close();
+        forceNewFile = true;
+        File newFile = SD.open(workingFile, FILE_WRITE);
+
+        while(Serial.available() == 0){
+         // Wait until there is a response
+        }
+
+        for(int i = 0; i < 5; i++){ // The length of Bytes to be read is the first 4 bytes
+          lengthToRead = (unsigned int) Serial.read(); // Makes the first byte the Delay time
+          lengthToRead = lengthToRead << 8; // Shift up the first byte
+          lengthToRead += (unsigned int) Serial.read(); // Adds the second byte to the Delay time
+        }
+
+        for(int i = 0; i < lengthToRead; i++){
+          newFile.print(Serial.read()); // Write what is read to file.
+        }
+
+        newFile.close(); // File is done.
+
+        Serial.println("File is Written.");
+        
+      }
     }
     else if(serialCommand == 'd'){ // Delete SD card File
       
@@ -246,6 +279,15 @@ void getSerialUpdates(){
       
     }
   }
+}
+
+void charArrayWriter(char *arrayToBeWritten, char *arrayFrom){
+
+  int arrayFromLength = strlen(arrayFrom);
+  for(int i=0; i < arrayFromLength; i++){
+    arrayToBeWritten[i] = arrayFrom[i];
+  }
+  arrayToBeWritten[arrayFromLength] = '\0';
 }
 
 void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte){
