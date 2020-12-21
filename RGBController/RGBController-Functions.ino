@@ -1,18 +1,3 @@
-/* TO DO:
- *  
- *  Change File from Text to Physical Data.
- *  Create Converter that reads current data file and converts it to the ideal file type
- *      - True Byte Equivalent
- *      - Commands
- *        - New Device
- *          -Device Port and Length
- *        - Update Device
- *          -Device RGB Colors
- *          -Make sure the device exists first
- *        - New Frame
- *        - 
- *  
-*/
 #include <FastLED.h>
 #include <SD.h>
 #include <SPI.h>
@@ -26,7 +11,7 @@ CRGB Device[MAXPORTS][MAXPIXELS];
 byte deviceNumPixels[MAXPORTS];
 
 File frames;
-char *selectedFile = "frames2.txt";
+char selectedFile[255];
 char workingFile[255];
 
 // change this to match your SD shield or module;
@@ -59,11 +44,12 @@ unsigned long frameStartTime = 0;
 unsigned long currentTime = 0;
 
 char serialCommand = "A";
-int lengthToRead;
+int lengthToRead = 0;
 
 bool forceNewFile = false;
 
 void setup(){
+  selectedFile = "frames2.txt"
   for(int i=0; i < MAXPORTS; i++){
     deviceNumPixels[i] = 0; // Initalizes the Array for Error Checking later
   }
