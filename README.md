@@ -14,9 +14,9 @@ The whole Idea behind this project was to create a much better RGB controller th
    
 
 ## To Do
-1. [x] Add File Sending over USB
-2. [] Add Devices Reset on File Close
-3. [] Add Live Frame Sending over USB
+- [x] Add File Sending over USB
+- [] Add Devices Reset on File Close
+- [] Add Live Frame Sending over USB
 
 
 
