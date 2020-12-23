@@ -43,7 +43,7 @@ int pixelsCount = 255;
 unsigned long frameStartTime = 0;
 unsigned long currentTime = 0;
 
-char serialCommand = "A";
+char serialCommand = 'A';
 int lengthToRead = 0;
 
 bool forceNewFile = false;
@@ -51,7 +51,7 @@ bool forceNewFile = false;
 void setup(){
 
   //Set Default file
-  charArrayWriter(selectedFile, (char*) "frames2.txt");
+  charArrayWriter(selectedFile, (char*) "frames4.txt");
   
   for(int i=0; i < MAXPORTS; i++){
     deviceNumPixels[i] = 0; // Initalizes the Array for Error Checking later
