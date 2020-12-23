@@ -69,16 +69,15 @@ void setup(){
 
   frameStartTime = millis(); // Start the First Frame time
 }
+
 void loop(){
 	// re-open the file for reading:
   frames = SD.open(selectedFile);
   if(frames){
     // read from the file until there's nothing else in it:
     while(frames.available()){
-      getSerialUpdates();
       switch (frames.read()){ // Read Command
         
-
         // RGB Color Sending
         case 0:{
           port = frames.read();
@@ -142,6 +141,7 @@ void loop(){
         // Start and/or Wait for Next Frame
         case 4:{
           FastLED.show(); //Send the Updated Pixel Data to the Devices
+          getSerialUpdates();
           currentTime = millis();
           if((currentTime - frameStartTime) < delayval){
             delay(delayval - (currentTime - frameStartTime));
@@ -201,26 +201,25 @@ void getSerialUpdates(){
       }
       else {
         Serial.println("Starting File Writing.");
-        frames.close();
         forceNewFile = true;
         File newFile = SD.open(workingFile, FILE_WRITE);
 
-        while(Serial.available() == 0){
-         // Wait until there is a response
+        while(Serial.available() == 0); 
+  
+        lengthToRead = 0;
+        for(int i = 0; i < 4; i++){
+          while(Serial.available() == 0); // Wait for Data
+          lengthToRead <<= 8; // Shift up the first byte
+          lengthToRead += (unsigned int) Serial.read(); // Adds Bytes  
         }
 
-        for(int i = 0; i < 5; i++){ // The length of Bytes to be read is the first 4 bytes
-          lengthToRead = (unsigned int) Serial.read(); // Makes the first byte the Delay time
-          lengthToRead = lengthToRead << 8; // Shift up the first byte
-          lengthToRead += (unsigned int) Serial.read(); // Adds the second byte to the Delay time
-        }
-
+        Serial.println(lengthToRead);
+      
         for(int i = 0; i < lengthToRead; i++){
-          newFile.print(Serial.read()); // Write what is read to file.
+          while(Serial.available() == 0);
+          newFile.write(Serial.read()); // Write what is read to file.
         }
-
         newFile.close(); // File is done.
-
         Serial.println("File is Written.");
         
       }
