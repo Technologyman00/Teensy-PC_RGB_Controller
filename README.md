@@ -4,10 +4,10 @@ The whole Idea behind this project was to create a much better RGB controller th
 
 ## Downsides
 1. Files
-  - Limited to a File Name of 8 Characters
-   - example1.txt is at the max length
-  - Is not case-sensitive 
-   - example1.txt == EXAMPLE1.txt
+    - Limited to a File Name of 8 Characters
+     - example1.txt is at the max length
+    - Is not case-sensitive 
+     - example1.txt == EXAMPLE1.txt
       
 2. Max SD card size is 32 GB
    - There are some potential work arounds for larger SD cards
