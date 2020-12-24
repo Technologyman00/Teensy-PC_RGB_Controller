@@ -18,7 +18,8 @@ The whole Idea behind this project was to create a much better RGB controller th
 - [x] Transfer to VSCode
 - [x] Create Multiple Code Files
 - [ ] Add Devices Reset on File Close
-- [ ] Add Live Frame Sending over USB
+- [x] Add Live Frame Sending over USB
+- [ ] Improve Live Frame Sending
 
 
 
