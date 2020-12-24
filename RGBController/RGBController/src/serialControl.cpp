@@ -65,9 +65,9 @@ void getSerialUpdates(){
         Serial.print("Are you sure you want to delete: ");
         Serial.print(workingFile);
         Serial.println("? (Y/N))");
-
-        while(Serial.available() == 0);
-
+        while(Serial.available() == 0){
+         // Wait until there is a response
+        }
         serialCommand = Serial.read(); // Read Response
         if(serialCommand == 'Y' || serialCommand == 'y'){
           SD.remove(workingFile);
@@ -108,7 +108,7 @@ void getSerialUpdates(){
       Serial.println("--------------------");
     }
     else if(serialCommand == 's'){ // Show Input to Display a single Frame Live and not on SD Card
-       while(true){
+      while(true){
         while(Serial.available() == 0);
         serialCommand = Serial.read();
 
@@ -152,4 +152,5 @@ void getSerialUpdates(){
       }
     }
   }
+  serialCommand = 'z'; // reset to no selection
 }
