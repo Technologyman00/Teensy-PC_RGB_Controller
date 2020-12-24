@@ -16,6 +16,18 @@ void charArrayWriter(char *arrayToBeWritten, char *arrayFrom){
   arrayToBeWritten[arrayFromLength] = '\0';
 }
 
+// Time to Delay While checking for Serial updates
+void smartDelay(int delayMS){
+  unsigned long startSmartDelay = millis();
+  while((millis()-delayMS) < startSmartDelay){
+    getSerialUpdates(); // Check if there is a Serial Command to handle
+    if(forceNewFile){
+      break; // Stop Delay if there is a new file request.
+    }
+    delay(delayStep);
+  }
+}
+
 void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte){
 
   double H = (((double) H_byte) / 255) * 360;

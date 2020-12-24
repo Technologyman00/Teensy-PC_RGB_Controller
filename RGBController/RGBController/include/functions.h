@@ -9,6 +9,7 @@
 #include <math.h>
 #include "global.h"
 
+void smartDelay(int delayMS);
 void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte);
 void CreateLedDevice(int portForDevice, int pixelsInDevice);
 void getSerialUpdates();

@@ -21,7 +21,8 @@ extern char workingFile[255];
 extern const int chipSelect;
 
 extern unsigned int delayval; // Time (in milliseconds) to pause between pixels
-extern unsigned int errorDelayVal; // Time to pause between alerting errors for opening files
+extern const unsigned int errorDelayVal; // Time to pause between alerting errors for opening files
+extern const unsigned int delayStep; // Time to pause between checking for Serial Commands inside Smart Delay
 
 extern byte red;
 extern byte green;

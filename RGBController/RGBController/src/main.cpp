@@ -7,13 +7,13 @@
 #include "global.h"
 #include "functions.h"
 
-CRGB Device[MAXPORTS][MAXPIXELS];
+CRGB Device[MAXPORTS][MAXPIXELS]; // Data for LEDS
 
-byte deviceNumPixels[MAXPORTS];
+byte deviceNumPixels[MAXPORTS]; // Number of Pixels per Device
 
-File frames;
-char selectedFile[255];
-char workingFile[255];
+File frames; // Frames File Open
+char selectedFile[255]; // Name of Frames file
+char workingFile[255]; // Name of file being when using serial commands
 
 // change this to match your SD shield or module;
 // Arduino Ethernet shield: pin 4
@@ -27,27 +27,35 @@ char workingFile[255];
 const int chipSelect = BUILTIN_SDCARD;
 
 unsigned int delayval = 1000; // Time (in milliseconds) to pause between pixels
-unsigned int errorDelayVal = 1000; // Time to pause between alerting errors for opening files
+const unsigned int errorDelayVal = 1000; // Time to pause between alerting errors for opening files
+const unsigned int delayStep = 10; // Time to pause between checking for Serial Commands inside Smart Delay
 
-byte red = 0;
-byte green = 0;
-byte blue = 0;
+byte red = 0; // Temp Storage for Red Part of LED
+byte green = 0; // Temp Storage for Green Part of LED
+byte blue = 0; // Temp Storage for Blue Part of LED
 
-byte hue = 0;
-byte sat = 0;
-byte value = 0;
+byte hue = 0; // Temp Storage for Hue Value
+byte sat = 0; // Temp Storage for Saturation Value
+byte value = 0; // Temp Storage for Value Value
 
-byte commandSelect = 255;
-byte port = 255;
-int pixelsCount = 0;
+byte commandSelect = 255; // Selected Command from File
+byte port = 255; // Selected Port
+int pixelsCount = 0; // Number of Pixels as Pulled from deviceNumPixels
 
-unsigned long frameStartTime = 0;
-unsigned long currentTime = 0;
+unsigned long frameStartTime = 0; // Time when frame started
+unsigned long currentTime = 0; // Time when frame ended
 
-char serialCommand = 'A';
-int lengthToRead = 0;
+char serialCommand = 'A'; // Command Char from Serial
+int lengthToRead = 0; // length to Read from Serial for file transfer
 
-bool forceNewFile = false;
+int badFrames = 0; // Count of Bad Frames gets reset when displayed to user
+int framesPassed = 0; // Count of Frames Get Reset when reaches numbOfFramesTillAlert
+const int numbOfFramesTillAlert = 5; // Frames till alerting user how many bad frames passed
+
+bool forceNewFile = false; // If a new file is forced
+
+const int numbOfLoopsTillSerialCheck = 10; // Number of loops till checking for serial commands
+int loopCount = 0; // Count of Loops passed Gets Reset when reaches numbOfLoopsTillSerialCheck
 
 void setup(){
 
@@ -77,6 +85,13 @@ void loop(){
   if(frames){
     // read from the file until there's nothing else in it:
     while(frames.available()){
+
+      loopCount++; // Increment LoopCount
+      if(loopCount >= numbOfLoopsTillSerialCheck){ // Check if time to check serial updates
+        getSerialUpdates(); // Check if there is a Serial Command to handle
+        loopCount = 0;
+      }
+
       switch (frames.read()){ // Read Command
         
         // RGB Color Sending
@@ -113,7 +128,7 @@ void loop(){
               hue = frames.read(); // Read Hue Val
               sat = frames.read(); // Read Saturation Val
               value = frames.read();  // Read Value Val
-              HSVtoRGB(hue, sat, value);
+              HSVtoRGB(hue, sat, value); // Convert HSV to RGB // Updates Global RGB values
 
               Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
             }
@@ -130,8 +145,8 @@ void loop(){
   
         // Create New Device
         case 3:{ // Create New Device
-          port = (int) frames.read(); // Read Device Port
-          pixelsCount = (int) frames.read(); // Read How Many Pixels that device has
+          port = frames.read(); // Read Device Port
+          pixelsCount = frames.read(); // Read How Many Pixels that device has
   
           CreateLedDevice(port, pixelsCount); // Creates the Device
           
@@ -142,25 +157,32 @@ void loop(){
         // Start and/or Wait for Next Frame
         case 4:{
           FastLED.show(); //Send the Updated Pixel Data to the Devices
-          getSerialUpdates();
-          currentTime = millis();
-          if((currentTime - frameStartTime) < delayval){
-            delay(delayval - (currentTime - frameStartTime));
+          currentTime = millis(); // Update the Current Time
+          framesPassed++; // Increment Frame Counter
+          if((currentTime - frameStartTime) < delayval){ // See if the time took less than it should for a single frame.
+            smartDelay(delayval - (currentTime - frameStartTime)); // Wait the remaning time and Check for Serial Commands
           }
-          else{
-            Serial.print((currentTime - frameStartTime));
-            Serial.print(" ");
-            Serial.print(delayval);
-            Serial.println(" FRAMES TAKING TOO LONG TO DRAW!!!");
+          else{ 
+            badFrames++; // Increment bad Frame Counter
           }
-          frameStartTime = millis();
+          if(framesPassed >= numbOfFramesTillAlert){ // Check if correct number of Frames have passed.
+            framesPassed = 0; // Reset Frame Counter.
+            if(badFrames > 0){ // Check if number of bad frames is greater than 0.
+              // Alert User that it takes too long to update frames if done constantly
+                Serial.print(badFrames);
+                Serial.println(" FRAME(S) TAKING TOO LONG TO DRAW!!!");
+                
+                badFrames = 0; // Reset Frame counter 
+            }
+          }
+          frameStartTime = millis(); // Update Frame Start Time
           
           break;
         }
       }
-      if(forceNewFile){
+      if(forceNewFile){ // Break While loop if Requested by User
         forceNewFile = false;
-        break;
+        break; // Causes while loop escape and to close the currently open file to either refresh the file or open a new file.
       }
     }
     // close the file:
@@ -170,7 +192,6 @@ void loop(){
    // // if the file didn't open, print an error:
    Serial.print("error opening ");
    Serial.println(selectedFile);
-   getSerialUpdates(); // Check for new File Commands
-   delay(errorDelayVal); // Wait as to not spam console
+   smartDelay(errorDelayVal); // Wait as to not spam console and Check for Serial Commands
   }
 }

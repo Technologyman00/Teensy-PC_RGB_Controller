@@ -65,9 +65,9 @@ void getSerialUpdates(){
         Serial.print("Are you sure you want to delete: ");
         Serial.print(workingFile);
         Serial.println("? (Y/N))");
-        while(Serial.available() == 0){
-         // Wait until there is a response
-        }
+
+        while(Serial.available() == 0);
+
         serialCommand = Serial.read(); // Read Response
         if(serialCommand == 'Y' || serialCommand == 'y'){
           SD.remove(workingFile);
@@ -108,7 +108,48 @@ void getSerialUpdates(){
       Serial.println("--------------------");
     }
     else if(serialCommand == 's'){ // Show Input to Display a single Frame Live and not on SD Card
-      
+       while(true){
+        while(Serial.available() == 0);
+        serialCommand = Serial.read();
+
+        if(serialCommand == 'X'){
+          break; // Exit the while loop
+        }
+
+        while(Serial.available() == 0);
+        port = Serial.read();
+        pixelsCount = deviceNumPixels[port];
+        if(pixelsCount == 0){ // No device should have 0 pixels
+          Serial.print("Device: ");
+          Serial.print(port);
+          Serial.println(" not setup!");
+        }
+        else { // Update Pixels
+          if(serialCommand == 'R'){ // RGB Command
+            for(int i=0; i < pixelsCount; i++){
+              while(Serial.available() < 3);
+              red = Serial.read(); // Read Red Val
+              green = Serial.read(); // Read Green Val
+              blue = Serial.read();  // Read Blue Val
+
+              Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+            }
+            FastLED.show(); //Send the Updated Pixel Data to the Devices
+          }
+          else if(serialCommand == 'H'){ //HSV Command
+            for(int i=0; i < pixelsCount; i++){
+              while(Serial.available() < 3);
+              hue = Serial.read(); // Read Hue Val
+              sat = Serial.read(); // Read Saturation Val
+              value = Serial.read();  // Read Value Val
+              HSVtoRGB(hue, sat, value); // Convert HSV to RGB
+
+              Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+            }
+            FastLED.show(); //Send the Updated Pixel Data to the Devices
+          }
+        }
+      }
     }
   }
 }
