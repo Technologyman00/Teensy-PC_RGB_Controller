@@ -57,10 +57,10 @@ bool forceNewFile = false; // If a new file is forced
 const int numbOfLoopsTillSerialCheck = 10; // Number of loops till checking for serial commands
 int loopCount = 0; // Count of Loops passed Gets Reset when reaches numbOfLoopsTillSerialCheck
 
-void setup(){
+const char startFileName[12] = "startup.txt";
+const char defaultFileName[12] = "default.txt"; 
 
-  //Set Default file
-  charArrayWriter(selectedFile, (char*) "frames4.txt");
+void setup(){
 
   for(int i=0; i < MAXPORTS; i++){
     deviceNumPixels[i] = 0; // Initalizes the Array for Error Checking later
@@ -76,6 +76,10 @@ void setup(){
     Serial.println("initialization failed!");
     return;
   }
+
+  //Set Default file
+  //charArrayWriter(selectedFile, (char*) "frames4.txt"); // Old way with a hardcoded default file name
+  initalizeLEDCommands(); //Reads a startup file first to know which pattern to open by default
 
   frameStartTime = millis(); // Start the First Frame time
 }

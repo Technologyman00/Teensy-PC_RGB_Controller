@@ -47,4 +47,7 @@ extern int lengthToRead;
 
 extern bool forceNewFile;
 
+extern const char startFileName[12];
+extern const char defaultFileName[12];
+
 #endif

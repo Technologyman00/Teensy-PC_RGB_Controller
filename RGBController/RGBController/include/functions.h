@@ -19,6 +19,8 @@ void getSerialUpdates();
 void charArrayWriter(char *arrayToBeWritten, char *arrayFrom);
 
 void softRestart();
+void initalizeLEDCommands();
+void createDefaultFile();
 
 
 #endif  // FUNCTIONS_H

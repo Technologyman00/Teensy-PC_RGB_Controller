@@ -7,6 +7,7 @@
 #include "global.h"
 #include "functions.h"
 
+
 void softRestart(){
   Serial.end();  //clears the serial monitor  if used
   SCB_AIRCR = 0x05FA0004;  //write value for restart
