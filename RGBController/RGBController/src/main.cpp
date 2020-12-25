@@ -50,7 +50,7 @@ int lengthToRead = 0; // length to Read from Serial for file transfer
 
 int badFrames = 0; // Count of Bad Frames gets reset when displayed to user
 int framesPassed = 0; // Count of Frames Get Reset when reaches numbOfFramesTillAlert
-const int numbOfFramesTillAlert = 5; // Frames till alerting user how many bad frames passed
+const int numbOfFramesTillAlert = 10; // Frames till alerting user how many bad frames passed
 
 bool forceNewFile = false; // If a new file is forced
 
@@ -61,13 +61,14 @@ void setup(){
 
   //Set Default file
   charArrayWriter(selectedFile, (char*) "frames4.txt");
-  
+
   for(int i=0; i < MAXPORTS; i++){
     deviceNumPixels[i] = 0; // Initalizes the Array for Error Checking later
   }
- // Open serial communications and wait for port to open:
- Serial.begin(9600); // Does not need to set a speed but is written for conventions
- Serial.setTimeout(0); // Makes it not pause after reading in the Serial Commands
+
+  // Open serial communications and wait for port to open:
+  Serial.begin(9600); // Does not need to set a speed but is written for conventions
+  Serial.setTimeout(0); // Makes it not pause after reading in the Serial Commands
 
   delay(10); // Used In Example before SD card. I assume to allow SD to initalize??
 
@@ -176,12 +177,11 @@ void loop(){
             }
           }
           frameStartTime = millis(); // Update Frame Start Time
-          
           break;
         }
       }
       if(forceNewFile){ // Break While loop if Requested by User
-        forceNewFile = false;
+        forceNewFile = false; // Reset force new file bool
         break; // Causes while loop escape and to close the currently open file to either refresh the file or open a new file.
       }
     }

@@ -151,6 +151,8 @@ void getSerialUpdates(){
         }
       }
     }
+    else if(serialCommand == 'r'){ // Restart Controller
+      softRestart();
+    }
   }
-  serialCommand = 'z'; // reset to no selection
 }

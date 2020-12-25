@@ -7,6 +7,11 @@
 #include "global.h"
 #include "functions.h"
 
+void softRestart(){
+  Serial.end();  //clears the serial monitor  if used
+  SCB_AIRCR = 0x05FA0004;  //write value for restart
+}
+
 void charArrayWriter(char *arrayToBeWritten, char *arrayFrom){
 
   int arrayFromLength = strlen(arrayFrom);
@@ -195,5 +200,13 @@ void CreateLedDevice(int portForDevice, int pixelsInDevice){
     case 39:
       FastLED.addLeds<NEOPIXEL, 39>(Device[portForDevice], pixelsInDevice); // Create Device
       break;
+  }
+}
+
+// Nasty Dirty Hack for Deleting the devices as they require a const for the port but thats not how it works here.
+void DeleteLedDevice(int portForDevice){
+  // I hate this more than you do. I would much rather cast port to a const but I cant seem to get it working.
+  for(int i=0; i < deviceNumPixels[portForDevice]; i++){
+    Device[portForDevice][i] = CRGB(0,0,0);
   }
 }
