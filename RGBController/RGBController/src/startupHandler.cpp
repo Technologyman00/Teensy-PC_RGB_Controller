@@ -12,35 +12,49 @@ void initalizeLEDCommands(){
         File startFile = SD.open(startFileName); // Open Startup File
         startFile.readBytes(selectedFile, startFile.size()); // The only thing in the file should be the name of the file so read the whole file and write it to the selectedFile array
         if(!SD.exists(selectedFile)){ // Incase the file in the startup file doesnt exist create and run the default file.
-            SD.remove(startFileName); // Delete the bad Startup file so that it will be regenerated
-            
-            // Create Startup File
-            File startFile = SD.open(startFileName, FILE_WRITE); // Create startup file to write into
-            for(int i = 0; i < strlen(defaultFileName); i++){
-                startFile.write(defaultFileName[i]);
-            }
-            startFile.close(); // Close startup file
+
+            createStartupFile(); // Create a new startup file with default name (also deletes the startup file)
 
             if(!SD.exists(defaultFileName)){
-                createDefaultFile();
+                createDefaultFile(); // Create the default file if it doesnt exist
             }
-            createDefaultFile(); // Create the Defua
         }
         startFile.close(); // Close File after reading
     }
     else{
-        // Create Startup File
-        File startFile = SD.open(startFileName, FILE_WRITE); // Create startup file to write into
-        for(int i = 0; i < strlen(defaultFileName); i++){
-            startFile.write(defaultFileName[i]);
-        }
-        startFile.close(); // Close startup file
+        createStartupFile(); // Create Startup File
 
-        if(!SD.exists(defaultFileName)){
+        if(!SD.exists(defaultFileName)){ // If the default file doesnt exist create it
             createDefaultFile();
         }
         charArrayWriter(selectedFile, (char*) defaultFileName); // Select the defaultFile as the file to read
     }
+}
+
+void createStartupFile(){ // Create Startup File with default file
+    
+    if(SD.exists(startFileName)){ // Just incase it already exists delete it
+        SD.remove(startFileName);
+    }
+
+    File startFile = SD.open(startFileName, FILE_WRITE); // Create startup file to write into
+    for(unsigned int i = 0; i < strlen(defaultFileName); i++){
+        startFile.write(defaultFileName[i]);
+    }
+    startFile.close(); // Close startup file
+}
+
+void createStartupFile(char* fileName){ // Create Startup File with any file name
+
+    if(SD.exists(startFileName)){ // Just incase it already exists delete it
+        SD.remove(startFileName);
+    }
+    
+    File startFile = SD.open(startFileName, FILE_WRITE); // Create startup file to write into
+    for(unsigned int i = 0; i < strlen(fileName); i++){
+        startFile.write(fileName[i]);
+    }
+    startFile.close(); // Close startup file
 }
 
 void createDefaultFile(){ // Creates the Default Pattern File

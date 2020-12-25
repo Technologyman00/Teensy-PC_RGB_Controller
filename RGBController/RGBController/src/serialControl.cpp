@@ -57,6 +57,16 @@ void getSerialUpdates(){
         
       }
     }
+    else if(serialCommand == 's'){ // Change Startup file
+
+      lengthToRead = Serial.available()+1; //Save how many Serial Bytes to Read. +1 because it would always miss the last character
+      Serial.readString().toCharArray(workingFile, lengthToRead); // Read the String and put it to a char array
+
+      createStartupFile(workingFile);
+
+      Serial.print(workingFile);
+      Serial.println(" will now be played on startup.");
+    }
     else if(serialCommand == 'd'){ // Delete SD card File
       
       lengthToRead = Serial.available()+1; //Save how many Serial Bytes to Read. +1 because it would always miss the last character

@@ -20,6 +20,10 @@ void charArrayWriter(char *arrayToBeWritten, char *arrayFrom);
 
 void softRestart();
 void initalizeLEDCommands();
+
+void createStartupFile();
+void createStartupFile(char* fileName);
+
 void createDefaultFile();
 
 
