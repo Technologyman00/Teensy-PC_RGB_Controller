@@ -12,13 +12,18 @@ The whole Idea behind this project was to create a much better RGB controller th
 2. Max SD card size is 32 GB
    - There are some potential work arounds for larger SD cards
    
+3. LED Devices can only be added not removed per a given reboot
+   - I really cant imagine this being an issue for anyone, but I thought its important to note just incase.
+   - If 40 devices are created then they cannot be removed until a reboot
+   - All 40 devices will be written to until a reboot occurs
+   
 
 ## To Do
 - [x] Add File Sending over USB
 - [x] Transfer to VSCode
 - [x] Create Multiple Code Files
-- [ ] Add Devices Reset on File Close
-- [ ] Add Live Frame Sending over USB
+- [x] Add Live Frame Sending over USB
+- [ ] Improve Live Frame Sending
 
 
 
