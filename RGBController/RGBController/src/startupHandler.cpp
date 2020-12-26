@@ -18,6 +18,7 @@ void initalizeLEDCommands(){
             if(!SD.exists(defaultFileName)){
                 createDefaultFile(); // Create the default file if it doesnt exist
             }
+            charArrayWriter(selectedFile, (char*) defaultFileName); // Select the defaultFile as the file to read
         }
         startFile.close(); // Close File after reading
     }

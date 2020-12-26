@@ -22,8 +22,6 @@ void getSerialUpdates(){
       Serial.println(selectedFile);
       
       forceNewFile = true; // Force new File to open
-      frameStartTime = millis(); // Start new Frame Time
-      
     }
     else if(serialCommand == 'w'){ // Write SD card File
       

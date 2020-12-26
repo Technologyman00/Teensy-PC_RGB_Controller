@@ -113,7 +113,12 @@ void loop(){
               red = frames.read(); // Read Red Val
               green = frames.read(); // Read Green Val
               blue = frames.read();  // Read Blue Val
+
               Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+
+              if(forceNewFile){ // Break for loop if Requested by User
+                break; // Causes for loop escape
+              }
             }
           }
           break;
@@ -136,6 +141,10 @@ void loop(){
               HSVtoRGB(hue, sat, value); // Convert HSV to RGB // Updates Global RGB values
 
               Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+
+              if(forceNewFile){ // Break for loop if Requested by User
+                break; // Causes for loop escape
+              }
             }
           }
           break;
