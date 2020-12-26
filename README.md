@@ -24,7 +24,12 @@ The whole Idea behind this project was to create a much better RGB controller th
 - [x] Create Multiple Code Files
 - [x] Add Live Frame Sending over USB
 - [x] Improve Live Frame Sending
-- [ ] Clean Up Code for Default File Reading
-- [ ] Continue Work on Windows App for Sending File
-
+- [x] Clean Up Code for Default File Reading
+- [ ] Finish Sending File from Windows App
+- [ ] Create Pattern Designer
+- [ ] Finish PCB design
+- [ ] Get EE to review PCB design
+- [ ] Order PCBs
+- [ ] Assemble PCBs
+ 
 
