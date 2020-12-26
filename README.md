@@ -2,6 +2,15 @@
  
 The whole Idea behind this project was to create a much better RGB controller than the controllers or MB softwares I have seen. Currently It has already met that goal as it can play any pattern for many many LEDs and up to individual 40 devices. I am still working on the user interface and many quality of life things, but the main functionality does work. HOWEVER, it will need a PCB made in order to power all the LEDs as a Teensy cannot power that many safely.
 
+## Features
+
+- No Extra load on the CPU. The teensy has its own built in CPU that will handle all of the commands to the ARGB devices.
+- Store Loads of Patterns or Huge animations. The teensy uses an SD card to save and read all of the patterns allowing for a huge number of patterns to be saved.
+- Up to 40 ports. Most Controllers top out at a maximum of 4 ports. The teensy has 40! This allows each device to do it's own individual pattern.
+- Any pattern! There are no limitations on what can be displayed because it plays back frames allowing an almost infinite amount of customization. 
+- Standard Plugs! This uses the regular 3 pin 5V ARGB connectors so any device with the same connector can be used!
+- OPEN SOURCE! Are you a bit more handy than most? You can change anything you would ever what about this project!
+
 ## Documentation
 ### Pattern Files
 
