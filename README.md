@@ -5,7 +5,7 @@ The whole Idea behind this project was to create a much better RGB controller th
 ## Documentation
 ### Pattern Files
 
-Description | Command | Attribute 1 | Attribute 2
+Description | Command | Argument 1 | Argument 2
 ------------ | -------------| ------------ | -------------|
 Send RGB Command: | 0 | Port Number | Color Data |
 Send HSV Command: | 1 | Port Number | Color Data |
@@ -19,7 +19,7 @@ Start New Frame: | 4 | N/A | N/A | N/A |
 
 ### Serial Commands
 
-Description | Command | Attribute 1 | Attribute 2 | Attribute 3 |
+Description | Command | Argument 1 | Argument 2 | Argument 3 |
 ------------ | -------------| ------------ | -------------| -------------|
 Play File on SD Card: | P | File Name | N/A | N/A |
 Write File to SD Card: | W | File Name | Length to Read (4 Bytes) | File Data |
