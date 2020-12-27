@@ -167,7 +167,7 @@ void getSerialUpdates(){
         }
       }
     }
-    else if(serialCommand == 'r'){ // Restart Controller
+    else if(serialCommand == 'r' || serialCommand == 'R'){ // Restart Controller
       softRestart();
     }
   }
