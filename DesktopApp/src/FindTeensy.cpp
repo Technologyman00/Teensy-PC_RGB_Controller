@@ -25,8 +25,7 @@ std::string exec(const char* cmd) {
 
 using namespace std;
 
-int main(){
-
+string TeensyPort(){
     const regex regexp("16C0"); 
     smatch m;
     const string idResults = exec("wmic path Win32_SerialPort get PNPDeviceID");
@@ -58,9 +57,13 @@ int main(){
             break;
         }
     }
+    return port;
+}
 
-    cout << port <<endl;
-    wcout << port.length() <<endl;
+int main(){
+    
+
+    cout << TeensyPort() <<endl;
     
 
     //LPCSTR port = "\\\\.\\COM4";

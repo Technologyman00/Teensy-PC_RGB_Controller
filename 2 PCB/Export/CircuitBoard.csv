@@ -1,0 +1,6 @@
+"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
+1;"U5,U4,U3,U2,U1";"SOP65P640X120-20N";5;"TXS0108EPWR";;;
+2;"R1";"R_0201_0603Metric";1;"10k";;;
+3;"JMolex1";"TE_MATE-N-LOK_350211-1_1x04_P5.08mm_Vertical";1;"Conn_01x04_Male";;;
+4;"J42,J41,J40,J39,J38,J37,J36,J35,J34,J33,J32,J31,J30,J29,J28,J27,J26,J25,J24,J23,J20,J19,J18,J17,J16,J15,J14,J13,J12,J11,J10,J9,J8,J7,J6,J5,J4,J3,J2,J1";"FanPinHeader_1x04_P2.54mm_Vertical";40;"Conn_01x04_Male";;;
+5;"J22,J21";"PinSocket_1x24_P2.54mm_Vertical";2;"Conn_01x24_Female";;;
