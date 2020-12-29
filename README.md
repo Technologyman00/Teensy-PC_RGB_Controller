@@ -75,9 +75,9 @@ On startup the teensy will first read the *startup.txt* file which should contai
 - [x] Add Live Frame Sending over USB
 - [x] Improve Live Frame Sending
 - [x] Clean Up Code for Default File Reading
-- [ ] Finish Sending File from Windows App
+- [x] Finish Sending File from Windows App
 - [ ] Create Pattern Designer
-- [ ] Finish PCB design
+- [x] Finish PCB design
 - [ ] Get EE to review PCB design
 - [ ] Order PCBs
 - [ ] Assemble PCBs
