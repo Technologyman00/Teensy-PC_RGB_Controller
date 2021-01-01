@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include <FastLED.h>
+#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
@@ -12,7 +13,10 @@
 
 #define SCB_AIRCR (*(volatile uint32_t *)0xE000ED0C) // Application Interrupt and Reset Control location
 
+#define PARALLEL // Comment out if to use Series FastLED sending instead of OctoWS2811
+
 extern CRGB Device[MAXPORTS][MAXPIXELS];
+extern OctoWS2811 leds;
 
 extern byte deviceNumPixels[MAXPORTS];
 
@@ -38,6 +42,7 @@ extern byte commandSelect;
 extern byte port;
 
 extern int pixelsCount;
+extern int pixelsStart;
 
 extern unsigned long frameStartTime;
 extern unsigned long currentTime;

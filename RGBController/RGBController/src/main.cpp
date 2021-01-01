@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include <FastLED.h>
+#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
@@ -7,7 +8,24 @@
 #include "global.h"
 #include "functions.h"
 
-CRGB Device[MAXPORTS][MAXPIXELS]; // Data for LEDS
+#ifdef PARALLEL
+  // Any group of digital pins may be used
+  byte pinList[MAXPORTS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39};
+
+  // These buffers need to be large enough for all the pixels.
+  // The total number of pixels is "ledsPerStrip * numPins".
+  // Each pixel needs 3 bytes, so multiply by 3.  An "int" is
+  // 4 bytes, so divide by 4.  The array is created using "int"
+  // so the compiler will align it to 32 bit memory.
+  DMAMEM int displayMemory[MAXPIXELS * MAXPORTS * 3 / 4];
+  int drawingMemory[MAXPIXELS * MAXPORTS * 3 / 4];
+
+  const int config = WS2811_GRB | WS2811_800kHz;
+
+  OctoWS2811 leds(MAXPIXELS, displayMemory, drawingMemory, config, MAXPORTS, pinList);
+#else
+  CRGB Device[MAXPORTS][MAXPIXELS]; // Data for LEDS
+#endif
 
 byte deviceNumPixels[MAXPORTS]; // Number of Pixels per Device
 
@@ -28,7 +46,7 @@ const int chipSelect = BUILTIN_SDCARD;
 
 unsigned int delayval = 1000; // Time (in milliseconds) to pause between pixels
 const unsigned int errorDelayVal = 1000; // Time to pause between alerting errors for opening files
-const unsigned int delayStep = 10; // Time to pause between checking for Serial Commands inside Smart Delay
+const unsigned int delayStep = 1; // Time to pause between checking for Serial Commands inside Smart Delay
 
 byte red = 0; // Temp Storage for Red Part of LED
 byte green = 0; // Temp Storage for Green Part of LED
@@ -41,6 +59,7 @@ byte value = 0; // Temp Storage for Value Value
 byte commandSelect = 255; // Selected Command from File
 byte port = 255; // Selected Port
 int pixelsCount = 0; // Number of Pixels as Pulled from deviceNumPixels
+int pixelsStart = 0;
 
 unsigned long frameStartTime = 0; // Time when frame started
 unsigned long currentTime = 0; // Time when frame ended
@@ -80,6 +99,9 @@ void setup(){
   //Set Default file
   //charArrayWriter(selectedFile, (char*) "frames4.txt"); // Old way with a hardcoded default file name
   initalizeLEDCommands(); //Reads a startup file first to know which pattern to open by default
+  #ifdef PARALLEL
+    leds.begin();
+  #endif
 
   frameStartTime = millis(); // Start the First Frame time
 }
@@ -96,7 +118,6 @@ void loop(){
         getSerialUpdates(); // Check if there is a Serial Command to handle
         loopCount = 0;
       }
-
       switch (frames.read()){ // Read Command
         
         // RGB Color Sending
@@ -109,12 +130,18 @@ void loop(){
             Serial.println(" not setup!");
           }
           else { // Update Pixels
-            for(int i=0; i < pixelsCount; i++){
+            pixelsStart = GetLEDStart(port);
+            pixelsCount += pixelsStart;
+            for(int i=pixelsStart; i < pixelsCount; i++){
               red = frames.read(); // Read Red Val
               green = frames.read(); // Read Green Val
               blue = frames.read();  // Read Blue Val
 
-              Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #ifdef PARALLEL
+                leds.setPixel(i, red, green, blue);
+              #else
+                Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #endif
 
               if(forceNewFile){ // Break for loop if Requested by User
                 break; // Causes for loop escape
@@ -134,13 +161,19 @@ void loop(){
             Serial.println(" not setup!");
           }
           else { // Update Pixels
-            for(int i=0; i < pixelsCount; i++){
+            pixelsStart = GetLEDStart(port);
+            pixelsCount += pixelsStart;
+            for(int i=pixelsStart; i < pixelsCount; i++){
               hue = frames.read(); // Read Hue Val
               sat = frames.read(); // Read Saturation Val
               value = frames.read();  // Read Value Val
               HSVtoRGB(hue, sat, value); // Convert HSV to RGB // Updates Global RGB values
 
-              Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #ifdef PARALLEL
+                leds.setPixel(i, red, green, blue);
+              #else
+                Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #endif
 
               if(forceNewFile){ // Break for loop if Requested by User
                 break; // Causes for loop escape
@@ -170,7 +203,15 @@ void loop(){
         
         // Start and/or Wait for Next Frame
         case 4:{
-          FastLED.show(); //Send the Updated Pixel Data to the Devices
+          #ifdef PARALLEL
+                leds.show();
+                //while (leds.busy()){ // Wait until all sending has completed
+                //  smartDelay(1);
+                //}
+          #else
+                FastLED.show(); //Send the Updated Pixel Data to the Devices
+          #endif
+
           currentTime = millis(); // Update the Current Time
           framesPassed++; // Increment Frame Counter
           if((currentTime - frameStartTime) < delayval){ // See if the time took less than it should for a single frame.

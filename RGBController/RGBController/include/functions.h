@@ -13,7 +13,7 @@ void smartDelay(int delayMS);
 void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte);
 
 void CreateLedDevice(int portForDevice, int pixelsInDevice);
-void DeleteLedDevice(int portForDevice);
+int GetLEDStart(int port);
 
 void getSerialUpdates();
 void charArrayWriter(char *arrayToBeWritten, char *arrayFrom);

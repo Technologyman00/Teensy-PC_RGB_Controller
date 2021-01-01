@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include <FastLED.h>
+#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
@@ -80,8 +81,18 @@ void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte){
   
 }
 
-// Nasty Dirty Hack for Creating the devices as they require a const for the port but thats not how it works here.
+int GetLEDStart(int port){
+  #ifdef PARALLEL
+    return (port * MAXPIXELS);
+  #else
+    return 0;
+  #endif
+}
+
+
 void CreateLedDevice(int portForDevice, int pixelsInDevice){
+  #ifndef PARALLEL
+  // Nasty Dirty Hack for Creating the devices as they require a const for the port but thats not how it works here.
   // I hate this more than you do. I would much rather cast port to a const but I cant seem to get it working.
   switch (portForDevice){
     case 1:
@@ -202,12 +213,5 @@ void CreateLedDevice(int portForDevice, int pixelsInDevice){
       FastLED.addLeds<NEOPIXEL, 39>(Device[portForDevice], pixelsInDevice); // Create Device
       break;
   }
-}
-
-// Nasty Dirty Hack for Deleting the devices as they require a const for the port but thats not how it works here.
-void DeleteLedDevice(int portForDevice){
-  // I hate this more than you do. I would much rather cast port to a const but I cant seem to get it working.
-  for(int i=0; i < deviceNumPixels[portForDevice]; i++){
-    Device[portForDevice][i] = CRGB(0,0,0);
-  }
+  #endif
 }

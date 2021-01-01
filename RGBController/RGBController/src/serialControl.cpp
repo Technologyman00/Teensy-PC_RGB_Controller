@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include <FastLED.h>
+#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
@@ -142,27 +143,48 @@ void getSerialUpdates(){
         }
         else { // Update Pixels
           if(serialCommand == 0){ // RGB Command
-            for(int i=0; i < pixelsCount; i++){
+            pixelsStart = GetLEDStart(port);
+            pixelsCount += pixelsStart;
+            for(int i=pixelsStart; i < pixelsCount; i++){
               while(Serial.available() < 3);
               red = Serial.read(); // Read Red Val
               green = Serial.read(); // Read Green Val
               blue = Serial.read();  // Read Blue Val
 
-              Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #ifdef PARALLEL
+                leds.setPixel(i, red, green, blue);
+              #else
+                Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #endif
             }
-            FastLED.show(); //Send the Updated Pixel Data to the Devices
+            #ifdef PARALLEL
+              leds.show();
+            #else
+              FastLED.show(); //Send the Updated Pixel Data to the Devices
+            #endif
           }
           else if(serialCommand == 1){ //HSV Command
-            for(int i=0; i < pixelsCount; i++){
+            pixelsStart = GetLEDStart(port);
+            pixelsCount += pixelsStart;
+            for(int i=pixelsStart; i < pixelsCount; i++){
               while(Serial.available() < 3);
               hue = Serial.read(); // Read Hue Val
               sat = Serial.read(); // Read Saturation Val
               value = Serial.read();  // Read Value Val
               HSVtoRGB(hue, sat, value); // Convert HSV to RGB
 
-              Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              
+              #ifdef PARALLEL
+                leds.setPixel(i, red, green, blue);
+              #else
+                Device[port][i] = CRGB(-red+255, -green+255, -blue+255); // Update RAM for Pixels Info
+              #endif
             }
-            FastLED.show(); //Send the Updated Pixel Data to the Devices
+            #ifdef PARALLEL
+              leds.show();
+            #else
+              FastLED.show(); //Send the Updated Pixel Data to the Devices
+            #endif
           }
         }
       }

@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include <FastLED.h>
+#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
