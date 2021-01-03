@@ -78,8 +78,10 @@ On startup the teensy will first read the *startup.txt* file which should contai
 - [x] Finish Sending File from Windows App
 - [ ] Create Pattern Designer
 - [x] Finish PCB design
-- [ ] Get EE to review PCB design
+- [x] Get EE to review PCB design
 - [ ] Order PCBs
 - [ ] Assemble PCBs
- 
+- [X] Add Parallel Commands using OctoWS2811
+- [ ] Loop Commands inside Files?
+- [ ] Command Files for other Files?
 
