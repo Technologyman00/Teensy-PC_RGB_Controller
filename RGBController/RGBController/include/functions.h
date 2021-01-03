@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include "Arduino.h"
-#include <FastLED.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>

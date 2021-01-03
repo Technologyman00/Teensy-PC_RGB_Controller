@@ -1,12 +1,16 @@
 #include "Arduino.h"
-#include <FastLED.h>
-#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
 
 #include "global.h"
 #include "functions.h"
+
+#ifdef PARALLEL
+  #include <OctoWS2811.h>
+#else
+  #include <FastLED.h>
+#endif
 
 void getSerialUpdates(){
   if(Serial.available() > 0){

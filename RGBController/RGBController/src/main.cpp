@@ -1,6 +1,4 @@
 #include "Arduino.h"
-#include <FastLED.h>
-#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
@@ -9,6 +7,7 @@
 #include "functions.h"
 
 #ifdef PARALLEL
+  #include <OctoWS2811.h>
   // Any group of digital pins may be used
   byte pinList[MAXPORTS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39};
 
@@ -24,6 +23,7 @@
 
   OctoWS2811 leds(MAXPIXELS, displayMemory, drawingMemory, config, MAXPORTS, pinList);
 #else
+  #include <FastLED.h>
   CRGB Device[MAXPORTS][MAXPIXELS]; // Data for LEDS
 #endif
 

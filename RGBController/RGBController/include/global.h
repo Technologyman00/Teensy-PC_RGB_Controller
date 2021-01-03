@@ -2,8 +2,6 @@
 #define GLOBAL_H
 
 #include "Arduino.h"
-#include <FastLED.h>
-#include <OctoWS2811.h>
 #include <SD.h>
 #include <SPI.h>
 #include <math.h>
@@ -15,8 +13,13 @@
 
 #define PARALLEL // Comment out if to use Series FastLED sending instead of OctoWS2811
 
-extern CRGB Device[MAXPORTS][MAXPIXELS];
-extern OctoWS2811 leds;
+#ifdef PARALLEL
+  #include <OctoWS2811.h>
+  extern OctoWS2811 leds;
+#else
+  #include <FastLED.h>
+  extern CRGB Device[MAXPORTS][MAXPIXELS];
+#endif
 
 extern byte deviceNumPixels[MAXPORTS];
 
