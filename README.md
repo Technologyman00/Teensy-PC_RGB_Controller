@@ -79,6 +79,10 @@ On startup the teensy will first read the *startup.txt* file which should contai
 - [ ] Create Pattern Designer
 - [x] Finish PCB design
 - [x] Get EE to review PCB design
+- [x] Order ARGB Connectors
+- [ ] Recieve ARGB Connectors and Confirm Correct
+- [ ] Order Power Connector
+- [ ] Recieve Power Connector
 - [ ] Order PCBs
 - [ ] Assemble PCBs
 - [X] Add Parallel Commands using OctoWS2811
