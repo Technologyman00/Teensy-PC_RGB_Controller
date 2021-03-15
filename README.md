@@ -84,7 +84,8 @@ On startup the teensy will first read the *startup.txt* file which should contai
 - [x] Order Power Connector
 - [x] Recieve Power Connector
 - [x] Order PCBs
-- [ ] Assemble PCBs
+- [x] Assemble PCBs
+- [x] First Test : https://youtu.be/IeGvDfm8C_M
 - [X] Add Parallel Commands using OctoWS2811
 - [ ] Loop Commands inside Files?
 - [ ] Command Files for other Files?
