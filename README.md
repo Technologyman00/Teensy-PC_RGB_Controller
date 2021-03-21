@@ -50,6 +50,9 @@ Restart Teensy: | R | N/A | N/A | N/A |
 
 On startup the teensy will first read the *startup.txt* file which should contain the name of the file and only the name of the file. If this file does not exist or the code is unhappy with what was entered it will delete the *startup.txt* file and replace it with a *startup.txt* file that will run the default pattern file. The default pattern file sets all 40 ports to display Green on 255 pixels on those ports. This should make it so that it is obvious that the Teensy is working. The *startup.txt* file can be changed by either editing the file in a text editor or by sending the S command over serial.
 
+## Updates
+3/14 PCB Came in had issues. The Output enable pin was grounded not powered, which means it was disabled not enabled. (Woops) A small soldered wire fixed that.
+![photo of wire added to PCB](https://imgur.com/a/P7JOFXb)
 
 
 ## Limitations
