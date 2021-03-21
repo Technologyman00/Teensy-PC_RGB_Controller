@@ -6,7 +6,7 @@ The whole Idea behind this project was to create a much better RGB controller th
 
 - No Extra load on the CPU. The teensy has its own built in CPU that will handle all of the commands to the ARGB devices.
 - Store Loads of Patterns or Huge animations. The teensy uses an SD card to save and read all of the patterns allowing for a huge number of patterns to be saved.
-- Up to 40 ports. Most Controllers top out at a maximum of 4 ports. The teensy has 40! This allows each device to do it's own individual pattern.
+- Up to 40 ports. Most Controllers top out at a maximum of 4 ports. The teensy has 40! This allows each device to do its own individual pattern.
 - Any pattern! There are no limitations on what can be displayed because it plays back frames allowing an almost infinite amount of customization. 
 - Standard Plugs! This uses the regular 3 pin 5V ARGB connectors so any device with the same connector can be used!
 - OPEN SOURCE! Are you a bit more handy than most? You can change anything you would ever what about this project!
