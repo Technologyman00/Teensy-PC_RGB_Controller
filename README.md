@@ -52,7 +52,7 @@ On startup the teensy will first read the *startup.txt* file which should contai
 
 ## Updates
 3/14 PCB Came in had issues. The Output enable pin was grounded not powered, which means it was disabled not enabled. (Woops) A small soldered wire fixed that.
-![photo of wire added to PCB](https://imgur.com/a/P7JOFXb)
+![photo of wire added to PCB](IMG_20210314_171215.jpg)
 
 
 ## Limitations
