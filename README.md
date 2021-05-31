@@ -77,24 +77,9 @@ On startup the teensy will first read the *startup.txt* file which should contai
    
 
 ## To Do
-- [x] Add File Sending over USB
-- [x] Transfer to VSCode
-- [x] Create Multiple Code Files
-- [x] Add Live Frame Sending over USB
-- [x] Improve Live Frame Sending
-- [x] Clean Up Code for Default File Reading
-- [x] Finish Sending File from Windows App
 - [ ] Create Pattern Designer
-- [x] Finish PCB design
-- [x] Get EE to review PCB design
-- [x] Order ARGB Connectors
-- [x] Receive ARGB Connectors and Confirm Correct
-- [x] Order Power Connector
-- [x] Receive Power Connector
-- [x] Order PCBs
-- [x] Assemble PCBs
 - [x] First Test : https://youtu.be/IeGvDfm8C_M
-- [X] Add Parallel Commands using OctoWS2811
 - [ ] Loop Commands inside Files?
 - [ ] Command Files for other Files?
+- [ ] Allow devices to be removed without reboot?
 
