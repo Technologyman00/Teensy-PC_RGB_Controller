@@ -55,7 +55,8 @@ On startup the teensy will first read the *startup.txt* file which should contai
 ## Updates
 5/30 Version 2 of the PCB was ordered and should be arriving shortly. This new version is to fix the concerns with the previous version, as the size was quite large and there was a design error. Both should be fixed in this version. Pin 13 was also taken off of the available pins as it was decided that it should be used as a status LED and should remain off if used. 
 
-3/14 PCB Came in had issues. The Output enable pin was grounded not powered, which means it was disabled not enabled. (Woops) A small soldered wire fixed that.
+3/14 PCB Came in had issues. The Output enable pin was grounded not powered, which means it was disabled not enabled. (Woops) A small soldered wire fixed that. 
+First Test : https://youtu.be/IeGvDfm8C_M
 
 ![photo of wire added to PCB](IMG_20210314_171215.jpg)
 
@@ -78,7 +79,6 @@ On startup the teensy will first read the *startup.txt* file which should contai
 
 ## To Do
 - [ ] Create Pattern Designer
-- [x] First Test : https://youtu.be/IeGvDfm8C_M
 - [ ] Loop Commands inside Files?
 - [ ] Command Files for other Files?
 - [ ] Allow devices to be removed without reboot?
