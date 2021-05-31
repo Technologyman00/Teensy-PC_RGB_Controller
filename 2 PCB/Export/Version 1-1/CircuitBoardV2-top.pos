@@ -1,0 +1,12 @@
+### Module positions - created on 05/24/21 16:18:11 ###
+### Printed by Pcbnew version kicad (5.1.8)-1
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val          Package                 PosX       PosY       Rot  Side
+G***      LOGO         OpenSourceFix       136.6520   -71.6280    0.0000  top
+U1        TXS0108EPWR  SOP65P640X120-20N   140.4620  -125.7300    0.0000  top
+U2        TXS0108EPWR  SOP65P640X120-20N   139.9540   -89.4080    0.0000  top
+U3        TXS0108EPWR  SOP65P640X120-20N   126.7460   -71.1200   90.0000  top
+U4        TXS0108EPWR  SOP65P640X120-20N   113.5380   -96.5200  180.0000  top
+U5        TXS0108EPWR  SOP65P640X120-20N   113.5380  -132.3340  180.0000  top
+## End

@@ -15,6 +15,7 @@
 
 void softRestart(){
   Serial.end();  //clears the serial monitor  if used
+  frames.close(); //closes currently open file
   SCB_AIRCR = 0x05FA0004;  //write value for restart
 }
 

@@ -9,7 +9,8 @@
 #ifdef PARALLEL
   #include <OctoWS2811.h>
   // Any group of digital pins may be used
-  byte pinList[40] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39};
+  // In Version 2 of the PCB pin 13 that drive the LED was removed as it should be controlled independently
+  byte pinList[40] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40};
 
   // These buffers need to be large enough for all the pixels.
   // The total number of pixels is "ledsPerStrip * numPins".
@@ -79,6 +80,8 @@ int loopCount = 0; // Count of Loops passed Gets Reset when reaches numbOfLoopsT
 const char startFileName[12] = "startup.txt";
 const char defaultFileName[12] = "default.txt"; 
 
+int statusLED = 13; // LED on the Teensy
+
 void setup(){
 
   for(int i=0; i < MAXPORTS; i++){
@@ -102,6 +105,9 @@ void setup(){
   #ifdef PARALLEL
     leds.begin();
   #endif
+
+  pinMode(statusLED, OUTPUT); // Set the status LED to be an output.
+  digitalWrite(statusLED, LOW); // Annoying for it to always be on because there is an external power source. 
 
   frameStartTime = millis(); // Start the First Frame time
 }

@@ -1,5 +1,5 @@
 
-f = open("frames4.txt", "wb")
+f = open("PM6.txt", "wb")
 
 Output = b''
 
@@ -16,7 +16,7 @@ for ii in range(0, 255):
         f.write((1).to_bytes(1, byteorder='big'))
         f.write((1).to_bytes(1, byteorder='big'))
         for i in range(0, 9): # First Frame all White
-                f.write((ii).to_bytes(1, byteorder='big'))
+                f.write(abs((ii-(i*25))).to_bytes(1, byteorder='big'))
                 f.write((255).to_bytes(1, byteorder='big'))
                 f.write((255).to_bytes(1, byteorder='big'))
 

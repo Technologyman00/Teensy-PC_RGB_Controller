@@ -7,7 +7,7 @@
 #include <math.h>
 
 #define MAXPIXELS 100
-#define MAXPORTS  40
+#define MAXPORTS  12
 
 #define SCB_AIRCR (*(volatile uint32_t *)0xE000ED0C) // Application Interrupt and Reset Control location
 

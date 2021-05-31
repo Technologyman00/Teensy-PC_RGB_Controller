@@ -1,4 +1,4 @@
-19029267590313904
+19035748469028119
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -56363,6 +56363,20 @@ ESP8266 WiFi microcontroller
 0
 16
 16
+Molex
+7708461
+770846-1
+Connector
+0
+4
+4
+Molex
+NE555DR
+D (R-PDSO-G8)
+Integrated Circuit
+0
+8
+8
 MountingEquipment
 DINRailAdapter_3xM3_PhoenixContact_1201578
 https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-itemdetail:pid=1201578&library=usen&tab=1
@@ -58757,6 +58771,20 @@ net tie
 0
 4
 4
+OpenSource
+OpenSource
+
+
+0
+0
+0
+OpenSource
+OpenSourceFix
+
+
+0
+0
+0
 OptoDevice
 ADNS-9800
 Laser Gaming Sensor ADNS-9800

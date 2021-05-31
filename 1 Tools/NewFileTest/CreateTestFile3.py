@@ -1,11 +1,11 @@
 
-f = open("frames3.txt", "wb")
+f = open("frames9.txt", "wb")
 
 Output = b''
 
 f.write((4).to_bytes(1, byteorder='big')) # First Frame
 
-for i in range(0, 38):
+for i in range(0, 10):
         f.write((3).to_bytes(1, byteorder='big')) # Create Device
         f.write((i).to_bytes(1, byteorder='big')) # Port
         f.write((9).to_bytes(1, byteorder='big')) # Number of LEDS

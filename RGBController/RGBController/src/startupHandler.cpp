@@ -84,7 +84,7 @@ void createDefaultFile(){ // Creates the Default Pattern File
     for(byte p=0; p < MAXPORTS; p++){
         defaultFile.write(zero); // RGB Code
         defaultFile.write(p); // Port P
-        for(int s=0; s < 255; s++){
+        for(int s=0; s < MAXPIXELS; s++){ // Write Green to every LED in the "devices"
             defaultFile.write(zero); // Red = 0
             defaultFile.write(255); // Green = 255
             defaultFile.write(zero); // Blue = 0
