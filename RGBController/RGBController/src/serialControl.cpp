@@ -196,5 +196,20 @@ void getSerialUpdates(){
     else if(serialCommand == 'r' || serialCommand == 'R'){ // Restart Controller
       softRestart();
     }
+    else if(serialCommand == 't' || serialCommand == 'T'){ // Read Tempature of Teensy
+      Serial.print("Temperature: ");
+      Serial.print(tempmonGetTemp());
+      Serial.println("°C");
+    }
+    else if(serialCommand == 'z' || serialCommand == 'Z'){ // Sleep?
+      if(sleeping){
+        set_arm_clock (600000000);
+        sleeping = false;
+      }
+      else{
+        set_arm_clock (150000000);
+        sleeping = true;
+      }
+    }
   }
 }

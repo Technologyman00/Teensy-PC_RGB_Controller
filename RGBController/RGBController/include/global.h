@@ -10,6 +10,7 @@
 #define MAXPORTS  12
 
 #define SCB_AIRCR (*(volatile uint32_t *)0xE000ED0C) // Application Interrupt and Reset Control location
+extern "C" uint32_t set_arm_clock(uint32_t frequency); // required prototype
 
 #define PARALLEL // Comment out if to use Series FastLED sending instead of OctoWS2811
 
@@ -57,5 +58,7 @@ extern bool forceNewFile;
 
 extern const char startFileName[12];
 extern const char defaultFileName[12];
+
+extern bool sleeping;
 
 #endif

@@ -82,6 +82,8 @@ const char defaultFileName[12] = "default.txt";
 
 int statusLED = 13; // LED on the Teensy
 
+bool sleeping = false;
+
 void setup(){
 
   for(int i=0; i < MAXPORTS; i++){
@@ -108,6 +110,8 @@ void setup(){
 
   pinMode(statusLED, OUTPUT); // Set the status LED to be an output.
   digitalWrite(statusLED, LOW); // Annoying for it to always be on because there is an external power source. 
+
+  tempmon_init();
 
   frameStartTime = millis(); // Start the First Frame time
 }
