@@ -40,6 +40,7 @@ Change Startup File: | S | File Name | N/A | N/A |
 Display Frame: | D | RGB or HSV -> (0 or 1) | Port Number | Color Data |
 New Device: | N | Port | Number of Pixels | N/A |
 Restart Teensy: | R | N/A | N/A | N/A |
+Check Teensy Tempature: | T | N/A | N/A | N/A |
 
 - File Name requires the file type *"example.txt"*
 - File Data follows the documentation as setup in pattern files
