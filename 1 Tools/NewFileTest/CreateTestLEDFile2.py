@@ -1,6 +1,6 @@
 import colorsys
 
-f = open("fron11.txt", "wb")
+f = open("fron15.txt", "wb")
 
 for i in range(0, 12):
         f.write((3).to_bytes(1, byteorder='big')) # Create Device
@@ -10,7 +10,7 @@ for i in range(0, 12):
 f.write((2).to_bytes(1, byteorder='big'))
 f.write((30).to_bytes(2, byteorder='big'))
 
-resolution = 1000
+resolution = 360
 for iii in range(0, resolution):
         for port in range(0, 12):
                 f.write((0).to_bytes(1, byteorder='big'))
@@ -22,16 +22,10 @@ for iii in range(0, resolution):
                                 f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
                                 f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
                         else:
-                                if((iii+(ii*3)) <= resolution):
-                                        rgb = colorsys.hsv_to_rgb((iii+(ii*3))/resolution, 1, 1)
-                                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
-                                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
-                                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
-                                else:
-                                        rgb = colorsys.hsv_to_rgb(((iii+(ii*3))-resolution)/resolution, 1, 1)
-                                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
-                                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
-                                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
+                                rgb = colorsys.hsv_to_rgb((iii+(ii*6))/resolution, 1, 1)
+                                f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
+                                f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
+                                f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
                                         
         f.write((4).to_bytes(1, byteorder='big')) # Start Second Frame
         
