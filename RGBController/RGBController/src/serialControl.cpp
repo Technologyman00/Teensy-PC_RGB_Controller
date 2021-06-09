@@ -6,6 +6,8 @@
 #include "global.h"
 #include "functions.h"
 
+#include <LowPower.h>
+
 #ifdef PARALLEL
   #include <OctoWS2811.h>
 #else
@@ -202,14 +204,7 @@ void getSerialUpdates(){
       Serial.println("°C");
     }
     else if(serialCommand == 'z' || serialCommand == 'Z'){ // Sleep?
-      if(sleeping){
-        set_arm_clock (600000000);
-        sleeping = false;
-      }
-      else{
-        set_arm_clock (150000000);
-        sleeping = true;
-      }
+      LowPower.idle(SLEEP_FOREVER, ADC_OFF, TIMER2_OFF, TIMER1_OFF, TIMER0_OFF, SPI_OFF, USART0_ON, TWI_OFF);
     }
   }
 }
