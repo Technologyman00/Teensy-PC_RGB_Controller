@@ -17,7 +17,7 @@ The whole Idea behind this project was to create a much better RGB controller th
 Description | Command | Argument 1 | Argument 2
 ------------ | -------------| ------------ | -------------|
 Send RGB Command: | 0 | Port Number | Color Data |
-Send HSV Command: | 1 | Port Number | Color Data |
+Send HSV Command: | 1 | Port Number | Hue (2 Bytes) S (1 Byte) V (1 Byte)|
 Change Frame Delay: | 2 | Delay (2 Bytes) | N/A |
 Create Device/Change Length: | 3 | Port Number | Number of Pixels |
 Start New Frame: | 4 | N/A | N/A | N/A |
