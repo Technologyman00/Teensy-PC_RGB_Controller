@@ -38,7 +38,7 @@ extern byte red;
 extern byte green;
 extern byte blue;
 
-extern byte hue;
+extern unsigned int hue;
 extern byte sat;
 extern byte value;
 

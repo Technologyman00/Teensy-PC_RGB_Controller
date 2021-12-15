@@ -1,6 +1,6 @@
 import colorsys
 
-f = open("cycl7.txt", "wb")
+f = open("cyc99.txt", "wb")
 
 Strip = 28*[[0, 0, 0]]
 ##Fans = 11*[9*[[0, 0, 0]]]
@@ -41,13 +41,13 @@ f.write((100).to_bytes(2, byteorder='big'))
 
 hue = 0
 incra = 5
-res = 360
-for frames in range(0, 30):
+res = 360*3
+for frames in range(0, 100):
         for ii in range(0, 28):
                         f.write((0).to_bytes(1, byteorder='big'))
                         f.write((0).to_bytes(1, byteorder='big'))
                                 
-                        rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                        rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -68,7 +68,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((1).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -88,7 +88,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((2).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -108,7 +108,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((3).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -128,7 +128,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((4).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -148,7 +148,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((5).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -168,7 +168,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((6).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -188,7 +188,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((7).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -209,7 +209,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((8).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -230,7 +230,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((9).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -250,7 +250,7 @@ for frames in range(0, 30):
                 f.write((0).to_bytes(1, byteorder='big'))
                 f.write((10).to_bytes(1, byteorder='big'))
 
-                rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))
@@ -270,7 +270,7 @@ for frames in range(0, 30):
                         f.write((0).to_bytes(1, byteorder='big'))
                         f.write((11).to_bytes(1, byteorder='big'))
                         
-                        rgb = colorsys.hsv_to_rgb(hue/res, 1, 1)
+                        rgb = colorsys.hls_to_rgb(hue/res, 0.5, 1)
 ##                        f.write((int(255*rgb[0])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[1])).to_bytes(1, byteorder='big'))
 ##                        f.write((int(255*rgb[2])).to_bytes(1, byteorder='big'))

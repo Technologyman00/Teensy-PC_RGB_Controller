@@ -40,9 +40,9 @@ void smartDelay(int delayMS){
   }
 }
 
-void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte){
+void HSVtoRGB(unsigned int H_bytes, byte S_byte, byte V_byte){
 
-  double H = (((double) H_byte) / 255) * 360;
+  double H = (((double) H_bytes) / 65535) * 360;
 
   double V = ((double) V_byte) / 255;
   double S = ((double) S_byte) / 255;
@@ -83,7 +83,6 @@ void HSVtoRGB(byte H_byte, byte S_byte, byte V_byte){
     green = 0;
     blue = (byte) ((X_HSV+m)*255);
   }
-  
 }
 
 int GetLEDStart(int port){

@@ -53,7 +53,7 @@ byte red = 0; // Temp Storage for Red Part of LED
 byte green = 0; // Temp Storage for Green Part of LED
 byte blue = 0; // Temp Storage for Blue Part of LED
 
-byte hue = 0; // Temp Storage for Hue Value
+unsigned int hue = 0; // Temp Storage for Hue Value
 byte sat = 0; // Temp Storage for Saturation Value
 byte value = 0; // Temp Storage for Value Value
 
@@ -174,7 +174,12 @@ void loop(){
             pixelsStart = GetLEDStart(port);
             pixelsCount += pixelsStart;
             for(int i=pixelsStart; i < pixelsCount; i++){
-              hue = frames.read(); // Read Hue Val
+
+              hue = (unsigned int) frames.read(); // Read First Byte of Hue
+              hue = hue << 8; // Shift up the first byte
+              hue += (unsigned int) frames.read(); // Read Second Byte of Hue
+
+              //hue = frames.read(); // Read Hue Val
               sat = frames.read(); // Read Saturation Val
               value = frames.read();  // Read Value Val
               HSVtoRGB(hue, sat, value); // Convert HSV to RGB // Updates Global RGB values
