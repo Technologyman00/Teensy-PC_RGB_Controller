@@ -30,6 +30,9 @@
 
 byte deviceNumPixels[MAXPORTS]; // Number of Pixels per Device
 
+//uint8_t buffer[BUFFSIZE] DMAMEM; // https://forum.pjrc.com/threads/66265-Fastest-way-to-transfer-data-to-from-Teensy-4-0-4-1-and-Windows-10
+                                    //https://github.com/WMXZ-EU/MTP_t4
+
 File frames; // Frames File Open
 char selectedFile[255]; // Name of Frames file
 char workingFile[255]; // Name of file being when using serial commands
@@ -93,6 +96,8 @@ void setup(){
   // Open serial communications and wait for port to open:
   Serial.begin(9600); // Does not need to set a speed but is written for conventions
   Serial.setTimeout(0); // Makes it not pause after reading in the Serial Commands
+
+  //memset(buffer, 0x44,BUFFSIZE); // Increase Serial Buffer Size
 
   delay(10); // Used In Example before SD card. I assume to allow SD to initalize??
 

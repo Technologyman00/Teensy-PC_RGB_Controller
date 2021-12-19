@@ -52,7 +52,7 @@ void getSerialUpdates(){
         Serial.println(lengthToRead);
       
         for(int i = 0; i < lengthToRead; i++){
-          while(Serial.available() == 0);
+          while(Serial.available() == 0); // Wait for Data
           newFile.write(Serial.read()); // Write what is read to file.
         }
         newFile.close(); // File is done.

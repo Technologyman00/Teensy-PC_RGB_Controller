@@ -9,6 +9,8 @@
 #define MAXPIXELS 100
 #define MAXPORTS  12
 
+#define BUFFSIZE 300*1024
+
 #define SCB_AIRCR (*(volatile uint32_t *)0xE000ED0C) // Application Interrupt and Reset Control location
 extern "C" uint32_t set_arm_clock(uint32_t frequency); // required prototype
 
@@ -23,6 +25,8 @@ extern "C" uint32_t set_arm_clock(uint32_t frequency); // required prototype
 #endif
 
 extern byte deviceNumPixels[MAXPORTS];
+
+//extern uint8_t buffer[BUFFSIZE] DMAMEM;
 
 extern File frames;
 extern char selectedFile[255];
